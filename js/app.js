@@ -11,11 +11,11 @@ const CATEGORY_LABELS = {
 
 const CATEGORY_ICONS = {
   kapray:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3 4 6l1.5 3L8 8v13h8V8l2.5 1L20 6l-4-3-2 2h-4z"/></svg>',
-  joote:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 18v-4c2-.3 3-1 4-2l2-2c1 1.2 2.4 2 4 2h3.5c1.9 0 3.5 1.6 3.5 3.5V18z"/><pa[...]
+  joote:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 18v-4c2-.3 3-1 4-2l2-2c1 1.2 2.4 2 4 2h3.5c1.9 0 3.5 1.6 3.5 3.5V18z"/><path d="M3 18h18M6 10l2-3M14 10l2-3"/></svg>',
   mobile:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>',
-  electronics:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2[...]
+  electronics:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2l2.8 2.8"/></svg>',
   exercise:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6.5 6.5 17.5 17.5M4 9l3-3M17 20l3-3M2 11l3 3M18 5l3 3"/></svg>',
-  other:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.6 12.3 12.3 20.6a1.5 1.5 0 0 1-2.1 0l-7-7a1.5 1.5 0 0 1 0-2.1L11.5 3.2a1.[...]
+  other:'<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20.6 12.3 12.3 20.6a1.5 1.5 0 0 1-2.1 0l-7-7a1.5 1.5 0 0 1 0-2.1L11.5 3.2a1.5 1.5 0 0 1 2.1 0l7 7c.6.6.6 1.5 0 2.1z"/></svg>'
 };
 
 let ALL_PRODUCTS = [];
@@ -70,7 +70,7 @@ function starSvg(){ return '<svg width="13" height="13" viewBox="0 0 24 24" fill
 
 /* ---------- product rendering ---------- */
 function heartSvg(filled){
-  return '<svg width="16" height="16" viewBox="0 0 24 24" '+(filled?'fill="currentColor" stroke="currentColor"':'fill="none" stroke="currentColor"')+' stroke-width="2"><path d="M12 21s-7.5-4.6-10-[...]
+  return '<svg width="16" height="16" viewBox="0 0 24 24" '+(filled?'fill="currentColor" stroke="currentColor"':'fill="none" stroke="currentColor"')+' stroke-width="2"><path d="M12 21s-7.5-4.6-10-7.5C-.3 11.5 1.5 6 5.5 6c2 0 3.5 1 6.5 4 3-3 4.5-4 6.5-4 4 0 5.8 5.5 3.5 7.5-2.5 2.9-10 7.5-10 7.5z"/></svg>';
 }
 
 function renderProductCard(p){
@@ -84,7 +84,7 @@ function renderProductCard(p){
         (disc>0 ? '<span class="badge-disc">-'+disc+'%</span>' : '')+
         (p.badge ? '<span class="badge-tag">'+escapeHtml(p.badge)+'</span>' : '')+
         (outOfStock ? '<span class="badge-tag" style="left:auto;right:9px;top:9px;background:#c0392b;">Out of Stock</span>' : '')+
-        '<button class="wish'+(wished?' on':'')+'" onclick="event.stopPropagation();toggleLike(\''+p.id+'\')" aria-label="'+(wished?'Remove from liked products':'Save to liked products')+'">'+hear[...]
+        '<button class="wish'+(wished?' on':'')+'" onclick="event.stopPropagation();toggleLike(\''+p.id+'\')" aria-label="'+(wished?'Remove from liked products':'Save to liked products')+'">'+heartSvg(wished)+'</button>'+
       '</div>'+
       '<div class="pcard-body">'+
         '<h3 class="pcard-name">'+escapeHtml(p.name)+'</h3>'+
@@ -95,7 +95,7 @@ function renderProductCard(p){
         '</div>'+
         (outOfStock
           ? '<button class="pcard-add" disabled style="opacity:.55;cursor:not-allowed;" onclick="event.stopPropagation();">Out of Stock</button>'
-          : '<button class="pcard-add" onclick="event.stopPropagation();quickAdd(\''+p.id+'\')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"[...]
+          : '<button class="pcard-add" onclick="event.stopPropagation();quickAdd(\''+p.id+'\')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>Add</button>')+
       '</div>'+
     '</article>'
   );
@@ -111,7 +111,7 @@ function renderProducts(){
     list = list.filter(p => (p.name+' '+(p.desc||'')+' '+catLabel(p.category)).toLowerCase().includes(q));
   }
   if(list.length === 0){
-    grid.innerHTML = '<div class="empty"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.[...]
+    grid.innerHTML = '<div class="empty"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><b>Koi product nahi mila</b><p>Doosri category try karein ya search badlein.</p></div>';
   } else {
     grid.innerHTML = list.map(renderProductCard).join('');
   }
@@ -141,7 +141,7 @@ function buildCategories(){
   const circles = document.getElementById('catCircles');
   if(circles){
     let ch = '<button class="cat-circle active" data-cat="all" onclick="setFilter(\'all\')"><span class="ring">'+
-      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7[...]
+      '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>'+
       '</span><span>All</span></button>';
     cats.forEach(c => {
       ch += '<button class="cat-circle" data-cat="'+escapeHtml(c)+'" onclick="setFilter(\''+c+'\')"><span class="ring">'+
@@ -200,22 +200,22 @@ function renderDetail(){
   const disc = discountPct(p);
   const el = document.getElementById('productDetail');
   const thumbs = imgs.map((im,i)=>'<img src="'+im.src+'" alt="" class="'+(i===PD.index?'active':'')+'" onclick="pdGo('+i+')">').join('');
-  const sizes = (p.sizes||[]).map(s=>'<button class="'+(s===PD.size?'active':'')+'" onclick="pdSize('+JSON.stringify(escapeHtml(s)).replace(/"/g,'&quot;')+')">'+escapeHtml(s)+'</button>').join(''[...]
+  const sizes = (p.sizes||[]).map(s=>'<button class="'+(s===PD.size?'active':'')+'" onclick="pdSize('+JSON.stringify(escapeHtml(s)).replace(/"/g,'&quot;')+')">'+escapeHtml(s)+'</button>').join('');
   const details = (p.details||[]).map(d=>'<li>'+escapeHtml(d)+'</li>').join('');
 
   el.innerHTML =
     '<div class="pd-gallery">'+
       '<div class="pd-main">'+
         '<img id="pdMainImg" src="'+(imgs[PD.index]?imgs[PD.index].src:'')+'" alt="'+escapeHtml(p.name)+'">'+
-        (imgs.length>1 ? '<button class="pd-nav prev" onclick="pdSlide(-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6[...]
-        '<button class="pd-nav next" onclick="pdSlide(1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg></but[...]
+        (imgs.length>1 ? '<button class="pd-nav prev" onclick="pdSlide(-1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>' : '')+
+        (imgs.length>1 ? '<button class="pd-nav next" onclick="pdSlide(1)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg></button>' : '')+
       '</div>'+
       (imgs.length>1 ? '<div class="pd-thumbs" id="pdThumbs">'+thumbs+'</div>' : '')+
     '</div>'+
     '<div class="pd-info">'+
       (p.badge ? '<span class="pd-badge">'+escapeHtml(p.badge)+'</span>' : '')+
       '<h2 style="display:flex;align-items:center;justify-content:space-between;gap:10px;">'+escapeHtml(p.name)+
-        '<button class="wish'+(USER_LIKES.has(p.id)?' on':'')+'" style="position:static;flex-shrink:0;" onclick="toggleLike(\''+p.id+'\')" aria-label="Save to liked products">'+heartSvg(USER_LIKE[...]
+        '<button class="wish'+(USER_LIKES.has(p.id)?' on':'')+'" style="position:static;flex-shrink:0;" onclick="toggleLike(\''+p.id+'\')" aria-label="Save to liked products">'+heartSvg(USER_LIKES.has(p.id))+'</button>'+
       '</h2>'+
       '<div class="pd-rate">'+(p.rating?'<span class="rating" style="color:var(--star)">'+starSvg()+'<span class="num" style="color:var(--ink);font-weight:700">'+p.rating+'</span></span>':'')+
         (p.ratingCount?'<span>'+p.ratingCount+' ratings</span>':'')+(p.sold?'<span>· '+p.sold+' sold</span>':'')+'</div>'+
@@ -223,7 +223,7 @@ function renderDetail(){
         (p.oldPrice&&p.oldPrice>p.price?'<span class="was">'+money(p.oldPrice)+'</span><span class="off">-'+disc+'%</span>':'')+'</div>'+
       '<div class="pd-delivery">+ '+money(DELIVERY_CHARGE)+' delivery · Cash on Delivery available</div>'+
       (p.sizes&&p.sizes.length ? '<div class="pd-field"><label>'+escapeHtml(p.sizeLabel||'Size')+'</label><div class="size-opts">'+sizes+'</div></div>' : '')+
-      '<div class="pd-field"><label>Quantity</label><div class="stepper" style="border-radius:9px;"><button onclick="pdQty(-1)">−</button><span id="pdQty">'+PD.qty+'</span><button onclick="pdQt[...]
+      '<div class="pd-field"><label>Quantity</label><div class="stepper" style="border-radius:9px;"><button onclick="pdQty(-1)">−</button><span id="pdQty">'+PD.qty+'</span><button onclick="pdQty(1)">+</button></div></div>'+
       '<div class="pd-actions">'+
         '<button class="btn btn-gold" onclick="pdAddToCart(false)">Add to Cart</button>'+
         '<button class="btn btn-navy" onclick="pdAddToCart(true)">Buy Now</button>'+
@@ -234,10 +234,10 @@ function renderDetail(){
         (p.note?'<div class="note">'+escapeHtml(p.note)+'</div>':'')+
         (p.productCode?'<div class="note" style="font-style:normal"><b>Product Code:</b> '+escapeHtml(p.productCode)+'</div>':'')+
       '</div>' : '')+
-      '<button class="pd-share" onclick="shareProduct()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="18" cy="5" r="2.6"/><circ[...]
+      '<button class="pd-share" onclick="shareProduct()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/><path d="M8.8 7.5l6.4 3.7M8.8 16.5l6.4-3.7"/></svg>Share</button>'+
     '</div>';
 }
-function pdGo(i){ PD.index=i; document.getElementById('pdMainImg').src = PD.product.images[i].src; document.querySelectorAll('#pdThumbs img').forEach((t,idx)=>t.classList.toggle('active',idx===i)[...]
+function pdGo(i){ PD.index=i; document.getElementById('pdMainImg').src = PD.product.images[i].src; document.querySelectorAll('#pdThumbs img').forEach((t,idx)=>t.classList.toggle('active',idx===i)); }
 function pdSlide(d){ const n=PD.product.images.length; pdGo((PD.index+d+n)%n); }
 function pdSize(s){ PD.size=s; document.querySelectorAll('.size-opts button').forEach(b=>b.classList.toggle('active', b.textContent===s)); }
 function pdQty(d){ PD.qty=Math.max(1,PD.qty+d); document.getElementById('pdQty').textContent=PD.qty; }
@@ -284,7 +284,7 @@ function updateCartUI(){
   const body = document.getElementById('cartBody');
   const foot = document.getElementById('cartFoot');
   if(CART.length===0){
-    body.innerHTML = '<div class="cart-empty"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2[...]
+    body.innerHTML = '<div class="cart-empty"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L22 8H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg><b>Cart khaali hai</b><p>Products dhundho aur shopping shuru karo!</p></div>';
     foot.style.display='none';
   } else {
     body.innerHTML = CART.map(it =>
@@ -296,7 +296,7 @@ function updateCartUI(){
           '<div class="cprice">'+money(it.price)+'</div>'+
           '<div class="citem-bottom">'+
             '<div class="stepper"><button onclick="changeQty(\''+it.key+'\',-1)">−</button><span>'+it.qty+'</span><button onclick="changeQty(\''+it.key+'\',1)">+</button></div>'+
-            '<button class="link-del" onclick="removeItem(\''+it.key+'\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7h16M9 [...]
+            '<button class="link-del" onclick="removeItem(\''+it.key+'\')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 7h16M9 11v6M15 11v6M9 7l.8-2.4c.3-.8 1-1.3 2-1.3h2.4c1 0 1.7.5 2 1.3l.8 2.4"/></svg></button>'+
           '</div>'+
         '</div>'+
       '</div>'
@@ -308,7 +308,7 @@ function updateCartUI(){
     document.getElementById('cartTotal').textContent = money(sub+DELIVERY_CHARGE);
   }
 }
-function openCart(){ updateCartUI(); document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); document.body.style.overflow='hidde[...]
+function openCart(){ updateCartUI(); document.getElementById('cartOverlay').classList.add('open'); document.getElementById('cartDrawer').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeCart(){ document.getElementById('cartOverlay').classList.remove('open'); document.getElementById('cartDrawer').classList.remove('open'); document.body.style.overflow=''; }
 
 /* ---------- checkout ---------- */
@@ -330,7 +330,7 @@ function closeCheckout(){ document.getElementById('checkoutModal').classList.rem
 function buildCheckoutSummary(){
   const lines = document.getElementById('coLines');
   lines.innerHTML = CART.map(it =>
-    '<div class="co-line"><img src="'+it.img+'" alt=""><div class="m"><h5>'+escapeHtml(it.name)+'</h5><small>'+(it.size?'Size: '+escapeHtml(it.size)+' · ':'')+'Qty: '+it.qty+'</small></div><div [...]
+    '<div class="co-line"><img src="'+it.img+'" alt=""><div class="m"><h5>'+escapeHtml(it.name)+'</h5><small>'+(it.size?'Size: '+escapeHtml(it.size)+' · ':'')+'Qty: '+it.qty+'</small></div><div class="r">'+money(it.price*it.qty)+'</div></div>'
   ).join('');
   const sub = cartSubtotal();
   const total = sub + DELIVERY_CHARGE;
@@ -775,13 +775,17 @@ function watchCustomProducts(){
 function sanitizeForFirestore(value){
   if(value === undefined || value === null) return null;
   const t = typeof value;
-  if(t === 'string' || t === 'boolean') return value;
+  if(t === 'string'){
+    return value.trim() === '' ? null : value;
+  }
+  if(t === 'boolean') return value;
   if(t === 'number') return Number.isFinite(value) ? value : null;
   if(value instanceof Date) return value;
   if(Array.isArray(value)){
     return value
-      .filter(v => v !== undefined)
+      .filter(v => v !== undefined && v !== null && v !== '')
       .map(v => sanitizeForFirestore(v))
+      .filter(v => v !== null)
       .map(v => Array.isArray(v) ? {list:v} : v); // no arrays-in-arrays
   }
   if(value instanceof Set) return sanitizeForFirestore(Array.from(value));
@@ -793,11 +797,11 @@ function sanitizeForFirestore(value){
     if(value && value._methodName) return value;
     const out = {};
     Object.keys(value).forEach(function(k){
-      if(value[k] === undefined) return; // drop the key instead of storing null noise
+      if(value[k] === undefined || value[k] === null) return; // drop the key instead of storing null noise
       const clean = sanitizeForFirestore(value[k]);
-      if(clean !== undefined) out[k] = clean;
+      if(clean !== null && clean !== undefined) out[k] = clean;
     });
-    return out;
+    return Object.keys(out).length ? out : null;
   }
   return null; // functions, symbols, DOM nodes, File objects, etc.
 }
@@ -856,23 +860,23 @@ async function submitAddProduct(e){
   const category = document.getElementById('apCategory').value.trim() || 'other';
   const price = Number(document.getElementById('apPrice').value);
   const oldPriceRaw = document.getElementById('apOldPrice').value;
-  const oldPrice = oldPriceRaw ? Number(oldPriceRaw) : undefined;
+  const oldPrice = oldPriceRaw ? Number(oldPriceRaw) : null;
   const imageUrlsRaw = document.getElementById('apImageUrls').value.trim();
-  const imageUrls = imageUrlsRaw ? imageUrlsRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const imageUrls = imageUrlsRaw ? imageUrlsRaw.split(',').map(s=>s.trim()).filter(s => s.length > 0) : [];
   const files = Array.from(document.getElementById('apImageFiles').files || []);
-  const videoUrl = document.getElementById('apVideoUrl').value.trim();
+  const videoUrl = document.getElementById('apVideoUrl').value.trim() || null;
   const colorsRaw = document.getElementById('apColors').value.trim();
-  const colors = colorsRaw ? colorsRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const colors = colorsRaw ? colorsRaw.split(',').map(s=>s.trim()).filter(s => s.length > 0) : [];
   const sizesRaw = document.getElementById('apSizes').value.trim();
-  const sizes = sizesRaw ? sizesRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
+  const sizes = sizesRaw ? sizesRaw.split(',').map(s=>s.trim()).filter(s => s.length > 0) : ['Standard'];
   const flashSale = document.getElementById('apFlashSale').value === 'yes';
   const stockStatus = document.getElementById('apStock').value;
   const stockQtyRaw = document.getElementById('apStockQty').value;
-  const stockQty = stockQtyRaw !== '' ? Math.max(0, parseInt(stockQtyRaw,10)||0) : undefined;
+  const stockQty = stockQtyRaw !== '' ? Math.max(0, parseInt(stockQtyRaw,10)||0) : null;
   const hidden = document.getElementById('apVisible').value === 'no';
   const deliveryRaw = document.getElementById('apDelivery').value;
   const deliveryCharge = deliveryRaw ? Number(deliveryRaw) : DELIVERY_CHARGE;
-  const desc = document.getElementById('apDesc').value.trim();
+  const desc = document.getElementById('apDesc').value.trim() || null;
 
   const existing = editId ? ALL_PRODUCTS.find(p=>p.id===editId) : null;
 
@@ -902,7 +906,7 @@ async function submitAddProduct(e){
     price: price,
     oldPrice: oldPrice,
     desc: desc,
-    sizes: sizes.length ? sizes : ['Standard'],
+    sizes: sizes,
     sizeLabel: 'Size',
     colors: colors,
     videoUrl: videoUrl,
@@ -911,11 +915,11 @@ async function submitAddProduct(e){
     hidden: hidden,
     deliveryCharge: deliveryCharge,
     flashSale: flashSale,
-    details: (existing && existing.details) || [],
-    note: (existing && existing.note) || '',
-    productCode: (existing && existing.productCode) || '',
+    details: [],
+    note: null,
+    productCode: null,
     images: images,
-    badge: flashSale ? 'Flash Sale' : ((existing && existing.badge) || 'New'),
+    badge: flashSale ? 'Flash Sale' : 'New',
     addedByAdmin: true
   };
 
@@ -1044,7 +1048,7 @@ function applyProducts(data){
 }
 function skeletons(){
   const g=document.getElementById('productGrid');
-  g.innerHTML = Array.from({length:10}).map(()=>'<div class="sk"><div class="box"></div><div class="pad"><div class="ln w90"></div><div class="ln w40"></div><div class="ln w70"></div></div></div>[...]
+  g.innerHTML = Array.from({length:10}).map(()=>'<div class="sk"><div class="box"></div><div class="pad"><div class="ln w90"></div><div class="ln w40"></div><div class="ln w70"></div></div></div>').join('');
 }
 function loadProducts(){
   skeletons();
